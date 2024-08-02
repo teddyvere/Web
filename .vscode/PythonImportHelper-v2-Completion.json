@@ -1,37 +1,5 @@
 [
     {
-        "label": "Blueprint",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "render_template",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "Blueprint",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
-        "label": "render_template",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
         "label": "UserMixin",
         "importPath": "flask_login",
         "description": "flask_login",
@@ -48,47 +16,43 @@
         "documentation": {}
     },
     {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "create_app",
         "importPath": "website",
         "description": "website",
         "isExtraImport": true,
         "detail": "website",
-        "documentation": {}
-    },
-    {
-        "label": "login",
-        "kind": 2,
-        "importPath": "website.auth",
-        "description": "website.auth",
-        "peekOfCode": "def login():\n    return render_template('login.html')\n@auth.route('/logout')\ndef logout():\n    return \"<p>this is the Logout<p>\"\n@auth.route('/sign-up')\ndef sign_up():\n    return render_template('sign_up.html')",
-        "detail": "website.auth",
-        "documentation": {}
-    },
-    {
-        "label": "logout",
-        "kind": 2,
-        "importPath": "website.auth",
-        "description": "website.auth",
-        "peekOfCode": "def logout():\n    return \"<p>this is the Logout<p>\"\n@auth.route('/sign-up')\ndef sign_up():\n    return render_template('sign_up.html')",
-        "detail": "website.auth",
-        "documentation": {}
-    },
-    {
-        "label": "sign_up",
-        "kind": 2,
-        "importPath": "website.auth",
-        "description": "website.auth",
-        "peekOfCode": "def sign_up():\n    return render_template('sign_up.html')",
-        "detail": "website.auth",
-        "documentation": {}
-    },
-    {
-        "label": "auth",
-        "kind": 5,
-        "importPath": "website.auth",
-        "description": "website.auth",
-        "peekOfCode": "auth =  Blueprint('auth', __name__)\n@auth.route('/login')\ndef login():\n    return render_template('login.html')\n@auth.route('/logout')\ndef logout():\n    return \"<p>this is the Logout<p>\"\n@auth.route('/sign-up')\ndef sign_up():\n    return render_template('sign_up.html')",
-        "detail": "website.auth",
         "documentation": {}
     },
     {
@@ -107,6 +71,42 @@
         "description": "website.models",
         "peekOfCode": "class User(UserMixin):\n    pass",
         "detail": "website.models",
+        "documentation": {}
+    },
+    {
+        "label": "login",
+        "kind": 2,
+        "importPath": "website.routes",
+        "description": "website.routes",
+        "peekOfCode": "def login():\n    return render_template('login.html')\n@auth.route('/logout')\ndef logout():\n    return \"<p>this is the Logout<p>\"\n@auth.route('/sign-up', methods=['GET', 'POST'])\ndef sign_up():\n    return render_template('sign_up.html')",
+        "detail": "website.routes",
+        "documentation": {}
+    },
+    {
+        "label": "logout",
+        "kind": 2,
+        "importPath": "website.routes",
+        "description": "website.routes",
+        "peekOfCode": "def logout():\n    return \"<p>this is the Logout<p>\"\n@auth.route('/sign-up', methods=['GET', 'POST'])\ndef sign_up():\n    return render_template('sign_up.html')",
+        "detail": "website.routes",
+        "documentation": {}
+    },
+    {
+        "label": "sign_up",
+        "kind": 2,
+        "importPath": "website.routes",
+        "description": "website.routes",
+        "peekOfCode": "def sign_up():\n    return render_template('sign_up.html')",
+        "detail": "website.routes",
+        "documentation": {}
+    },
+    {
+        "label": "auth",
+        "kind": 5,
+        "importPath": "website.routes",
+        "description": "website.routes",
+        "peekOfCode": "auth =  Blueprint('auth', __name__)\n@auth.route('/login', methods=['GET', 'POST'])\ndef login():\n    return render_template('login.html')\n@auth.route('/logout')\ndef logout():\n    return \"<p>this is the Logout<p>\"\n@auth.route('/sign-up', methods=['GET', 'POST'])\ndef sign_up():\n    return render_template('sign_up.html')",
+        "detail": "website.routes",
         "documentation": {}
     },
     {

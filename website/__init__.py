@@ -9,8 +9,8 @@ def create_app():
     app.config['SECRET_KEY'] = 'new_password'
     
     from .views import views
-    from .auth import auth
-    from .models import User  # Import the User model
+    from .models import User
+    from .routes import auth
     
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
