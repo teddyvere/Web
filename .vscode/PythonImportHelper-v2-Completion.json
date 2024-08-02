@@ -8,6 +8,14 @@
         "documentation": {}
     },
     {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "Blueprint",
         "importPath": "flask",
         "description": "flask",
@@ -52,7 +60,7 @@
         "kind": 2,
         "importPath": "website.auth",
         "description": "website.auth",
-        "peekOfCode": "def login():\n    return \"<p>Login<p>\"\n@auth.route('/logout')\ndef logout():\n    return \"<p>Logout<p>\"\n@auth.route('/sign-up')\ndef sign_up():\n    return \"<p>Sign-up<p>\"",
+        "peekOfCode": "def login():\n    return render_template('login.html')\n@auth.route('/logout')\ndef logout():\n    return \"<p>this is the Logout<p>\"\n@auth.route('/sign-up')\ndef sign_up():\n    return render_template('sign_up.html')",
         "detail": "website.auth",
         "documentation": {}
     },
@@ -61,7 +69,7 @@
         "kind": 2,
         "importPath": "website.auth",
         "description": "website.auth",
-        "peekOfCode": "def logout():\n    return \"<p>Logout<p>\"\n@auth.route('/sign-up')\ndef sign_up():\n    return \"<p>Sign-up<p>\"",
+        "peekOfCode": "def logout():\n    return \"<p>this is the Logout<p>\"\n@auth.route('/sign-up')\ndef sign_up():\n    return render_template('sign_up.html')",
         "detail": "website.auth",
         "documentation": {}
     },
@@ -70,7 +78,7 @@
         "kind": 2,
         "importPath": "website.auth",
         "description": "website.auth",
-        "peekOfCode": "def sign_up():\n    return \"<p>Sign-up<p>\"",
+        "peekOfCode": "def sign_up():\n    return render_template('sign_up.html')",
         "detail": "website.auth",
         "documentation": {}
     },
@@ -79,7 +87,7 @@
         "kind": 5,
         "importPath": "website.auth",
         "description": "website.auth",
-        "peekOfCode": "auth =  Blueprint('auth', __name__)\n@auth.route('/login')\ndef login():\n    return \"<p>Login<p>\"\n@auth.route('/logout')\ndef logout():\n    return \"<p>Logout<p>\"\n@auth.route('/sign-up')\ndef sign_up():\n    return \"<p>Sign-up<p>\"",
+        "peekOfCode": "auth =  Blueprint('auth', __name__)\n@auth.route('/login')\ndef login():\n    return render_template('login.html')\n@auth.route('/logout')\ndef logout():\n    return \"<p>this is the Logout<p>\"\n@auth.route('/sign-up')\ndef sign_up():\n    return render_template('sign_up.html')",
         "detail": "website.auth",
         "documentation": {}
     },
