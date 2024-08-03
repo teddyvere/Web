@@ -269,7 +269,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "app = create_app()\nif __name__ == '__main__':\n    app.run(debug=True)",
+        "peekOfCode": "app = create_app()\nif __name__ == '__main__':\n    app.run(debug=True)\n# try to convert the sqlite database to mysql using sqlalchemy-migrate",
         "detail": "main",
         "documentation": {}
     }
