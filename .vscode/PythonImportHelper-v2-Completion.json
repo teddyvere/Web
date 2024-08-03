@@ -32,6 +32,22 @@
         "documentation": {}
     },
     {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "flash",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "Blueprint",
         "importPath": "flask",
         "description": "flask",
@@ -60,7 +76,7 @@
         "kind": 6,
         "importPath": "website.models",
         "description": "website.models",
-        "peekOfCode": "class Note():\n    pass\nclass User(UserMixin):\n    pass",
+        "peekOfCode": "class Note(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    data = db.Column(db.String(10000))\n    date = db.Column(db.DateTime(timezone=True), default=func.now())\n    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))\nclass User(db.Model, UserMixin):\n    id = db.Column(db.Integer, primary_key=True)\n    email = db.Column(db.String(150), unique=True)\n    password = db.Column(db.String(150))\n    first_name = db.Column(db.String(150))",
         "detail": "website.models",
         "documentation": {}
     },
@@ -69,7 +85,7 @@
         "kind": 6,
         "importPath": "website.models",
         "description": "website.models",
-        "peekOfCode": "class User(UserMixin):\n    pass",
+        "peekOfCode": "class User(db.Model, UserMixin):\n    id = db.Column(db.Integer, primary_key=True)\n    email = db.Column(db.String(150), unique=True)\n    password = db.Column(db.String(150))\n    first_name = db.Column(db.String(150))\n    notes = db.relationship('Note', backref='user')",
         "detail": "website.models",
         "documentation": {}
     },
@@ -78,7 +94,7 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def login():\n    return render_template('login.html')\n@auth.route('/logout')\ndef logout():\n    return \"<p>this is the Logout<p>\"\n@auth.route('/sign-up', methods=['GET', 'POST'])\ndef sign_up():\n    return render_template('sign_up.html')",
+        "peekOfCode": "def login():\n    data = request.form\n    print(data)\n    return render_template('login.html')\n@auth.route('/logout')\ndef logout():\n    return \"<p>this is the Logout<p>\"\n@auth.route('/sign-up', methods=['GET', 'POST'])\ndef sign_up():\n    if request.method == 'POST':",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -87,7 +103,7 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def logout():\n    return \"<p>this is the Logout<p>\"\n@auth.route('/sign-up', methods=['GET', 'POST'])\ndef sign_up():\n    return render_template('sign_up.html')",
+        "peekOfCode": "def logout():\n    return \"<p>this is the Logout<p>\"\n@auth.route('/sign-up', methods=['GET', 'POST'])\ndef sign_up():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        firstName = request.form.get('firstName')\n        password1 = request.form.get('password1')\n        password2 = request.form.get('password2')\n        if len(email) < 4:",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -96,7 +112,7 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def sign_up():\n    return render_template('sign_up.html')",
+        "peekOfCode": "def sign_up():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        firstName = request.form.get('firstName')\n        password1 = request.form.get('password1')\n        password2 = request.form.get('password2')\n        if len(email) < 4:\n            flash('Email must be at least 4 characters long', category='error')\n        elif len(firstName) < 2:\n            flash('First name must be at least 2 characters long', category='error')",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -105,7 +121,7 @@
         "kind": 5,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "auth =  Blueprint('auth', __name__)\n@auth.route('/login', methods=['GET', 'POST'])\ndef login():\n    return render_template('login.html')\n@auth.route('/logout')\ndef logout():\n    return \"<p>this is the Logout<p>\"\n@auth.route('/sign-up', methods=['GET', 'POST'])\ndef sign_up():\n    return render_template('sign_up.html')",
+        "peekOfCode": "auth =  Blueprint('auth', __name__)\n@auth.route('/login', methods=['GET', 'POST'])\ndef login():\n    data = request.form\n    print(data)\n    return render_template('login.html')\n@auth.route('/logout')\ndef logout():\n    return \"<p>this is the Logout<p>\"\n@auth.route('/sign-up', methods=['GET', 'POST'])",
         "detail": "website.routes",
         "documentation": {}
     },

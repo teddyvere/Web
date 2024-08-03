@@ -1,5 +1,10 @@
 from flask import Flask, g
 from flask_login import current_user, LoginManager
+from flask_sqlalchemy import SQLAlchemy
+from os import path
+
+db = SQLAlchemy()
+DB_FLASK1 = "database.db"
 
 
 
@@ -7,6 +12,8 @@ from flask_login import current_user, LoginManager
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'new_password'
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_FLASK1}'
+    db.init_app(app)
     
     from .views import views
     from .models import User
@@ -14,6 +21,7 @@ def create_app():
     
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
+        
     
     def inject_user():
         return dict(user=current_user)
@@ -27,5 +35,16 @@ def create_app():
     def load_user(user_id):
         return User.query.get(int(user_id))
     
+    from . import models
+    
+    create_db(app)
+    
     return app
+
+def create_db(app):
+    if not path.exists('website/'+ DB_FLASK1):
+        with app.app_context():
+            db.create_all()
+        print('Database created!')
+    
 
