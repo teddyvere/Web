@@ -2,6 +2,7 @@ from flask import Flask, g
 from flask_login import current_user, LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from os import path
+from flask_login import LoginManager
 
 db = SQLAlchemy()
 DB_FLASK1 = "database.db"
@@ -14,6 +15,12 @@ def create_app():
     app.config['SECRET_KEY'] = 'new_password'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_FLASK1}'
     db.init_app(app)
+    
+    login_manager = LoginManager()
+    login_manager.login_view = 'auth.login'
+    login_manager.init_app(app)
+    
+    
     
     from .views import views
     from .models import User
@@ -31,13 +38,16 @@ def create_app():
     login_manager = LoginManager()
     login_manager.init_app(app)
     
-    @login_manager.user_loader
-    def load_user(user_id):
-        return User.query.get(int(user_id))
     
     from . import models
     
     create_db(app)
+    
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
+    
+
     
     return app
 

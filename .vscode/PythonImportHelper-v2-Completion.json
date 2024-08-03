@@ -8,6 +8,54 @@
         "documentation": {}
     },
     {
+        "label": "login_user",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "logout_user",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "login_required",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "current_user",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "login_required",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
+        "label": "current_user",
+        "importPath": "flask_login",
+        "description": "flask_login",
+        "isExtraImport": true,
+        "detail": "flask_login",
+        "documentation": {}
+    },
+    {
         "label": "func",
         "importPath": "sqlalchemy.sql",
         "description": "sqlalchemy.sql",
@@ -48,6 +96,22 @@
         "documentation": {}
     },
     {
+        "label": "redirect",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "url_for",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "Blueprint",
         "importPath": "flask",
         "description": "flask",
@@ -61,6 +125,22 @@
         "description": "flask",
         "isExtraImport": true,
         "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "generate_password_hash",
+        "importPath": "werkzeug.security",
+        "description": "werkzeug.security",
+        "isExtraImport": true,
+        "detail": "werkzeug.security",
+        "documentation": {}
+    },
+    {
+        "label": "check_password_hash",
+        "importPath": "werkzeug.security",
+        "description": "werkzeug.security",
+        "isExtraImport": true,
+        "detail": "werkzeug.security",
         "documentation": {}
     },
     {
@@ -94,7 +174,7 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def login():\n    data = request.form\n    print(data)\n    return render_template('login.html')\n@auth.route('/logout')\ndef logout():\n    return \"<p>this is the Logout<p>\"\n@auth.route('/sign-up', methods=['GET', 'POST'])\ndef sign_up():\n    if request.method == 'POST':",
+        "peekOfCode": "def login():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        password = request.form.get('password')\n        user = User.query.filter_by(email=email).first()\n        if user:\n            if check_password_hash(user.password, password):\n                flash('Login successful!', category='success')\n                login_user(user, remember=True)\n                return redirect(url_for('views.home'))",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -103,7 +183,7 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def logout():\n    return \"<p>this is the Logout<p>\"\n@auth.route('/sign-up', methods=['GET', 'POST'])\ndef sign_up():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        firstName = request.form.get('firstName')\n        password1 = request.form.get('password1')\n        password2 = request.form.get('password2')\n        if len(email) < 4:",
+        "peekOfCode": "def logout():\n    logout_user()\n    return redirect(url_for('auth.login'))\n@auth.route('/sign-up', methods=['GET', 'POST'])\ndef sign_up():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        first_name = request.form.get('firstName')\n        password1 = request.form.get('password1')\n        password2 = request.form.get('password2')",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -112,7 +192,7 @@
         "kind": 2,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "def sign_up():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        firstName = request.form.get('firstName')\n        password1 = request.form.get('password1')\n        password2 = request.form.get('password2')\n        if len(email) < 4:\n            flash('Email must be at least 4 characters long', category='error')\n        elif len(firstName) < 2:\n            flash('First name must be at least 2 characters long', category='error')",
+        "peekOfCode": "def sign_up():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        first_name = request.form.get('firstName')\n        password1 = request.form.get('password1')\n        password2 = request.form.get('password2')\n        user = User.query.filter_by(email=email).first()\n        if user:\n            flash('Email already exists', category='error')\n        elif len(email) < 4:",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -121,7 +201,7 @@
         "kind": 5,
         "importPath": "website.routes",
         "description": "website.routes",
-        "peekOfCode": "auth =  Blueprint('auth', __name__)\n@auth.route('/login', methods=['GET', 'POST'])\ndef login():\n    data = request.form\n    print(data)\n    return render_template('login.html')\n@auth.route('/logout')\ndef logout():\n    return \"<p>this is the Logout<p>\"\n@auth.route('/sign-up', methods=['GET', 'POST'])",
+        "peekOfCode": "auth =  Blueprint('auth', __name__)\n@auth.route('/login', methods=['GET', 'POST'])\ndef login():\n    if request.method == 'POST':\n        email = request.form.get('email')\n        password = request.form.get('password')\n        user = User.query.filter_by(email=email).first()\n        if user:\n            if check_password_hash(user.password, password):\n                flash('Login successful!', category='success')",
         "detail": "website.routes",
         "documentation": {}
     },
@@ -139,7 +219,7 @@
         "kind": 5,
         "importPath": "website.views",
         "description": "website.views",
-        "peekOfCode": "views = Blueprint('views', __name__)\n@views.route('/')\ndef home():\n    return render_template(\"home.html\")",
+        "peekOfCode": "views = Blueprint('views', __name__)\n@views.route('/')\n@login_required\ndef home():\n    return render_template(\"home.html\")",
         "detail": "website.views",
         "documentation": {}
     },
